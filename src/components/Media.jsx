@@ -46,17 +46,34 @@ export default function Media({
 
   // Scaffolding only — there is genuinely nothing here to describe, and
   // announcing "placeholder image" would be noise.
+  //
+  // In development the box prints the intended alt text and aspect ratio, so
+  // the placeholders double as a shooting list. In production it shows a plain
+  // neutral panel instead: visitors should never see "TODO: photo of the arm"
+  // on a live page, and a quiet empty frame reads as deliberate.
+  if (import.meta.env.DEV) {
+    return (
+      <div
+        className={`${base} grid place-items-center border border-dashed border-hairline-strong bg-slate-100/80`}
+        style={style}
+        aria-hidden="true"
+      >
+        <div className="flex flex-col items-center gap-1.5 px-4 text-center">
+          <ImageIcon className="h-6 w-6 text-slate-400" />
+          <span className="text-xs font-medium text-slate-500">{label ?? alt ?? 'Photo'}</span>
+          <span className="text-[11px] tabular-nums text-slate-400">{ratio}</span>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div
-      className={`${base} grid place-items-center border border-dashed border-hairline-strong bg-slate-100/80`}
+      className={`${base} grid place-items-center bg-slate-100`}
       style={style}
       aria-hidden="true"
     >
-      <div className="flex flex-col items-center gap-1.5 px-4 text-center">
-        <ImageIcon className="h-6 w-6 text-slate-400" />
-        <span className="text-xs font-medium text-slate-500">{label ?? alt ?? 'Photo'}</span>
-        <span className="text-[11px] tabular-nums text-slate-400">{ratio}</span>
-      </div>
+      <ImageIcon className="h-7 w-7 text-slate-300" />
     </div>
   )
 }
