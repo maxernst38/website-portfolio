@@ -88,6 +88,11 @@ export default function Navbar() {
       */}
       <div
         id="mobile-nav"
+        /* `inert` when collapsed: the panel is only visually hidden (it still
+           occupies the DOM for the height transition), so without this a screen
+           reader would read a second copy of the nav that sighted users cannot
+           see. inert removes it from the a11y tree and from tab order at once. */
+        inert={!open}
         className={`grid overflow-hidden transition-[grid-template-rows,opacity] duration-300 ease-soft md:hidden ${
           open ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
         }`}
@@ -100,7 +105,6 @@ export default function Navbar() {
                   <NavLink
                     to={item.to}
                     end={item.to === '/'}
-                    tabIndex={open ? 0 : -1}
                     className={({ isActive }) =>
                       `block border-b border-hairline py-3.5 text-base font-medium last:border-b-0 ${
                         isActive ? 'text-brand-600' : 'text-body'
