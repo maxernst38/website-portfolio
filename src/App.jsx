@@ -1,11 +1,21 @@
-// Temporary smoke-test app — replaced by the real route tree in a later commit.
+import { Routes, Route } from 'react-router'
+import Layout from './components/Layout.jsx'
+import Home from './pages/Home.jsx'
+import Resume from './pages/Resume.jsx'
+import Projects from './pages/Projects.jsx'
+import Contact from './pages/Contact.jsx'
+import NotFound from './pages/NotFound.jsx'
+
 export default function App() {
   return (
-    <div className="container-page py-24">
-      <h1 className="text-display text-brand-600">Clean &amp; bright.</h1>
-      <p className="mt-4 text-lg text-body">
-        If this is Inter and the heading is indigo, the toolchain is wired correctly.
-      </p>
-    </div>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="resume" element={<Resume />} />
+        <Route path="projects" element={<Projects />} />
+        <Route path="contact" element={<Contact />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   )
 }
