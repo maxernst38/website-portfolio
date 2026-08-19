@@ -28,9 +28,9 @@ export const profile = {
   // tags. Change it once here and it updates everywhere.
   name: 'Max Ernst',
   shortName: 'Max',                    // navbar wordmark + footer mark
-  role: 'TODO: Software Engineer',
-  location: 'TODO: City, Country',
-  availability: 'TODO: Open to new roles',  // hero status pill; set null to hide
+  role: 'Software Engineer, Robotics Engineer, Robotics Coach',
+  location: 'Seattle, WA',
+  availability: 'Open to New Roles',  // hero status pill; set null to hide
   tagline: 'TODO: One line, ~12 words, what you build and who for.',
   bio:
     'TODO: Two or three sentences. What you work on, what you are good at, and ' +
@@ -56,32 +56,20 @@ export const heroCtas = [
   { label: 'Get in touch', to: '/contact', variant: 'secondary' },
 ]
 
-/* ── Home page navigation-card grid (the "splash → hub" section) ───────── */
+/* ── Home page navigation buttons (the "splash → hub" section) ─────────── */
 export const homeCards = [
-  {
-    to: '/resume',
-    title: 'Resume',
-    description: 'TODO: one line — where I have worked and what I can do.',
-    cta: 'View resume',
-    image: { src: null, alt: 'TODO: e.g. "Desk with notebook and laptop"' },
-  },
-  {
-    to: '/projects',
-    title: 'Projects',
-    description: 'TODO: one line — things I have designed, built and shipped.',
-    cta: 'Browse projects',
-    image: { src: null, alt: 'TODO: e.g. "Screenshot collage of shipped apps"' },
-  },
-  {
-    to: '/contact',
-    title: 'Contact',
-    description: 'TODO: one line — the fastest way to reach me.',
-    cta: 'Say hello',
-    image: { src: null, alt: 'TODO: e.g. "Coffee cup beside a phone"' },
-  },
+  { to: '/resume', label: 'Resume' },
+  { to: '/projects', label: 'Projects' },
+  { to: '/contact', label: 'Contact' },
 ]
 
-/* ── Projects ──────────────────────────────────────────────────────────── */
+/* ── Projects ────────────────────────────────────────────────────────────
+   Each project gets its own page at /projects/<slug>, where `description`
+   is shown in full.
+
+   `demo` attaches a live, interactive app to that page. Set it to a key from
+   src/demos/registry.js, or null for a write-up only. Demos are lazy-loaded,
+   so a heavy one costs the rest of the site nothing until someone opens it. */
 export const projects = [
   {
     slug: 'robosync',
@@ -98,6 +86,9 @@ export const projects = [
       { label: 'Live demo', href: 'TODO: https://…', icon: 'external' },
       { label: 'Source', href: 'https://github.com/maxernst38/robosync', icon: 'github' },
     ],
+    // Placeholder so you can see the demo framework working —
+    // swap for a real demo key, or set to null to remove it.
+    demo: 'example-pointcloud',
     featured: true,
   },
   {
@@ -110,6 +101,7 @@ export const projects = [
     tags: ['TODO: Tech', 'TODO: Tech'],
     image: { src: null, alt: 'TODO: describe the screenshot' },
     links: [{ label: 'Source', href: 'TODO: https://github.com/…', icon: 'github' }],
+    demo: null,
     featured: true,
   },
   {
@@ -122,6 +114,7 @@ export const projects = [
     tags: ['TODO: Tech'],
     image: { src: null, alt: 'TODO: describe the screenshot' },
     links: [],
+    demo: null,
     featured: false,
   },
 ]

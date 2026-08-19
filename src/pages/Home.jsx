@@ -89,13 +89,9 @@ export default function Home() {
           />
         </Reveal>
 
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-4 sm:grid-cols-3 sm:gap-6">
           {homeCards.map((card, i) => (
-            <Reveal
-              key={card.to}
-              delay={i * 90}
-              className={i === 2 ? 'sm:col-span-2 lg:col-span-1' : ''}
-            >
+            <Reveal key={card.to} delay={i * 90}>
               <NavCard card={card} className="h-full" />
             </Reveal>
           ))}
