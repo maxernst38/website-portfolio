@@ -17,11 +17,18 @@ Export at 2× the display size so they stay sharp on retina screens.
 
 | Slot | File | Aspect | Export at | Used on |
 |---|---|---|---|---|
-| Portrait | `portrait.jpg` | 4 / 5 | 880 × 1100 | Home hero |
+| Portrait | `portrait-1.jpg` | 4 / 5 | 880 × 1100 | Home hero slideshow |
+| Portrait | `portrait-2.jpg` | 4 / 5 | 880 × 1100 | Home hero slideshow |
+| Portrait | `portrait-3.jpg` | 4 / 5 | 880 × 1100 | Home hero slideshow |
 | Nav card | `card-resume.jpg` | 4 / 3 | 736 × 552 | Home grid |
 | Nav card | `card-projects.jpg` | 4 / 3 | 736 × 552 | Home grid |
 | Nav card | `card-contact.jpg` | 4 / 3 | 736 × 552 | Home grid |
 | Project shot | `project-*.png` | 16 / 9 | 1120 × 630 | Projects page |
+
+The hero is a slideshow, so add as many portraits as you like — crop them all
+to the same 4/5 frame so they crossfade cleanly instead of jumping. Add or
+remove entries in `profile.photos`; with one photo (or none yet) it renders as
+a plain image with no controls.
 
 Two more live in `public/` (not here) because they're referenced by URL rather
 than imported: `favicon.svg` and `og-image.png` (1200 × 630, the social card).

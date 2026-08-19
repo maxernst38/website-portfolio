@@ -1,5 +1,5 @@
 import Button from '../components/Button.jsx'
-import Media from '../components/Media.jsx'
+import Slideshow from '../components/Slideshow.jsx'
 import NavCard from '../components/NavCard.jsx'
 import Reveal from '../components/Reveal.jsx'
 import Section from '../components/Section.jsx'
@@ -52,10 +52,9 @@ function Hero() {
               className="absolute -inset-6 rounded-full bg-brand-200/35 blur-3xl"
               aria-hidden="true"
             />
-            <Media
-              {...profile.portrait}
+            <Slideshow
+              items={profile.photos}
               ratio="4/5"
-              eager
               className="relative border border-hairline shadow-card"
             />
           </div>

@@ -96,6 +96,17 @@ export const ExternalLink = (p) => (
   </Icon>
 )
 
+export const Pause = (p) => (
+  <Icon {...p}>
+    <rect x="6" y="4" width="4" height="16" rx="1" />
+    <rect x="14" y="4" width="4" height="16" rx="1" />
+  </Icon>
+)
+
+export const Play = (p) => (
+  <Icon {...p}><path d="M6 3.5 20 12 6 20.5V3.5z" /></Icon>
+)
+
 export const ImageIcon = (p) => (
   <Icon {...p}>
     <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />

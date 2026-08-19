@@ -16,7 +16,9 @@
 //    no CSS. Keep styling decisions in the components.
 // ─────────────────────────────────────────────────────────────────────────────
 
-// import portrait      from '../assets/images/portrait.jpg'          // 880×1100 (4/5)
+// import portrait1     from '../assets/images/portrait-1.jpg'        // 880×1100 (4/5)
+// import portrait2     from '../assets/images/portrait-2.jpg'        // 880×1100 (4/5)
+// import portrait3     from '../assets/images/portrait-3.jpg'        // 880×1100 (4/5)
 // import shotExplorer  from '../assets/images/project-explorer.png'  // 1120×630 (16/9)
 // import shotKasparo   from '../assets/images/project-kasparobot.png'// 1120×630 (16/9)
 // import shotSlam      from '../assets/images/project-slam.png'      // 1120×630 (16/9)
@@ -39,10 +41,14 @@ export const profile = {
     'what they are looking at. Dual B.S.E. in Computer Science and Robotics from the ' +
     'University of Michigan, with work spanning DARPA-funded research, medical-grade ' +
     'robotic control, and computer vision at dataset scale.',
-  portrait: {
-    src: null,
-    alt: 'TODO: describe the portrait, e.g. "Max beside a robotic arm"',
-  },
+  // Hero slideshow. Add as many as you like — they crossfade automatically.
+  // With one photo (or none yet) it renders as a plain image with no controls,
+  // so this works at any count. Same 4/5 crop for all of them.
+  photos: [
+    { src: null, alt: 'TODO: describe photo 1, e.g. "Max beside a robotic arm"' },
+    { src: null, alt: 'TODO: describe photo 2, e.g. "Max at the fabrication lab"' },
+    { src: null, alt: 'TODO: describe photo 3, e.g. "Max with a competition team"' },
+  ],
   resumePdf: null,   // set to '/resume.pdf' after dropping the file into public/
 }
 
