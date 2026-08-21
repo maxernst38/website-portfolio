@@ -110,12 +110,12 @@ export const projects = [
       'direction of maximum variance. The point is to make dataset problems visible, so ' +
       'mislabelled samples and blurred class boundaries show up as spatial outliers rather ' +
       'than as a number in an evaluation table.',
-    tags: ['Python', 'Streamlit', 'CLIP', 'PyTorch', 'Plotly'],
+    tags: ['Python', 'CLIP', 'PyTorch', 'three.js', 'WebGL'],
     image: { src: null, alt: 'TODO: screenshot of the 3D embedding view with class centroids' },
     links: [
       { label: 'Source', href: repo('Latent-Space-3D-Explorer'), icon: 'github' },
     ],
-    demo: null,   // ← the browser port would attach here
+    demo: 'encoding-explorer',
   },
   {
     slug: 'kasparobot',

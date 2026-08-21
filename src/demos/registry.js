@@ -19,13 +19,18 @@ import { lazy } from 'react'
  *
  * The component gets the full content width and should manage its own height.
  * It runs entirely in the browser — there is no server behind this site.
+ *
+ * NOTE: src/demos/encoding-explorer/ and public/bundles/ are generated, not
+ * hand-written. They are copied in from the Latent-Space-3D-Explorer repo by
+ * its scripts/sync_portfolio.mjs; edit them there and re-run that script, or
+ * the next sync silently discards the change.
  */
 export const demos = {
-  'example-pointcloud': {
-    label: 'Interactive demo',
+  'encoding-explorer': {
+    label: 'Explore the embedding space',
     // Shown under the heading, to set expectations before it loads.
     note: 'Runs entirely in your browser — nothing is uploaded.',
-    load: lazy(() => import('./example-pointcloud/index.jsx')),
+    load: lazy(() => import('./encoding-explorer/index.jsx')),
   },
 }
 
