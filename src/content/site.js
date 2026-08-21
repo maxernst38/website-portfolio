@@ -25,6 +25,20 @@
 // import shotPokemon   from '../assets/images/project-pokemon.png'   // 1120×630 (16/9)
 // import shotDiffusion from '../assets/images/project-diffusion.png' // 1120×630 (16/9)
 
+/* ── GitHub ────────────────────────────────────────────────────────────────
+   Every GitHub link on the site is built from this. Projects are currently
+   split across two accounts and are being consolidated onto `maxernst38`.
+
+   When the migration is done: set GITHUB_USER to 'maxernst38' and delete the
+   one owner override on Kasparobot below. That is the whole change.
+
+   Note: if you move repos with GitHub's "Transfer ownership" rather than
+   deleting and re-pushing, GitHub keeps redirects from the old URLs, so links
+   out in the world (and this site) keep working through the switch. */
+const GITHUB_USER = 'Max-Ernst'
+
+const repo = (name, owner = GITHUB_USER) => `https://github.com/${owner}/${name}`
+
 /* ── Identity ──────────────────────────────────────────────────────────── */
 export const profile = {
   // Drives the hero <h1>, every page <title>, the footer copyright and the OG
@@ -99,7 +113,7 @@ export const projects = [
     tags: ['Python', 'Streamlit', 'CLIP', 'PyTorch', 'Plotly'],
     image: { src: null, alt: 'TODO: screenshot of the 3D embedding view with class centroids' },
     links: [
-      { label: 'Source', href: 'https://github.com/Max-Ernst/Latent-Space-3D-Explorer', icon: 'github' },
+      { label: 'Source', href: repo('Latent-Space-3D-Explorer'), icon: 'github' },
     ],
     demo: null,   // ← the browser port would attach here
   },
@@ -119,7 +133,8 @@ export const projects = [
     tags: ['Python', 'YOLO', 'OpenCV', 'ROS', 'Stockfish'],
     image: { src: null, alt: 'TODO: photo of the arm mid-move over the chessboard' },
     links: [
-      { label: 'Source', href: 'https://github.com/maxernst38/Kasparobot', icon: 'github' },
+      // Already on maxernst38; drop the override once everything else moves there.
+      { label: 'Source', href: repo('Kasparobot', 'maxernst38'), icon: 'github' },
     ],
     demo: null,
   },
@@ -156,7 +171,7 @@ export const projects = [
     tags: ['Python', 'PyTorch', 'GAN', 'SLURM'],
     image: { src: null, alt: 'TODO: grid of generated Pokémon designs' },
     links: [
-      { label: 'Source', href: 'https://github.com/Max-Ernst/Pokemon-Design-Synthesis', icon: 'github' },
+      { label: 'Source', href: repo('Pokemon-Design-Synthesis'), icon: 'github' },
     ],
     demo: null,
   },
@@ -319,8 +334,8 @@ export const contact = {
   socials: [
     {
       label: 'GitHub',
-      handle: '@Max-Ernst',
-      href: 'https://github.com/Max-Ernst',
+      handle: `@${GITHUB_USER}`,
+      href: `https://github.com/${GITHUB_USER}`,
       icon: 'github',
     },
     {
