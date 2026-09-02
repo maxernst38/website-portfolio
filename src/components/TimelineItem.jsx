@@ -11,9 +11,10 @@ export default function TimelineItem({ item, isLast = false }) {
   return (
     <li className={`relative pl-8 print-break-inside-avoid ${isLast ? '' : 'pb-10'}`}>
       {/* Timeline dot. The rail itself is a border on the parent <ol>. */}
+      {/* Square rather than round, to match the chip and card corners. */}
       <span
-        className={`absolute left-0 top-1.5 h-3.5 w-3.5 rounded-full border-2 border-brand-600 ${
-          current ? 'bg-brand-600 ring-4 ring-brand-100' : 'bg-white'
+        className={`absolute left-0 top-1.5 h-3 w-3 rotate-45 border border-brand-600 ${
+          current ? 'bg-accent ring-4 ring-brand-100' : 'bg-surface'
         }`}
         aria-hidden="true"
       />
@@ -35,7 +36,7 @@ export default function TimelineItem({ item, isLast = false }) {
         )}
       </p>
 
-      <p className="mt-1 text-sm tabular-nums text-muted">
+      <p className="mt-1 font-mono text-xs tabular-nums text-muted">
         {item.start} – {item.end}
         {item.location ? ` · ${item.location}` : ''}
       </p>

@@ -16,6 +16,10 @@ const VARIANTS = {
     'bg-white text-ink border border-hairline hover:border-brand-200 hover:bg-brand-50/60',
   ghost:
     'text-brand-600 hover:bg-brand-50',
+  // The secondary button as it appears on the dark chrome. A white block there
+  // is louder than the primary action it is supposed to sit behind.
+  outline:
+    'bg-transparent text-chrome-ink border border-chrome-line hover:border-accent hover:text-accent',
 }
 
 const SIZES = {

@@ -34,7 +34,7 @@ export default function ProjectDetail() {
       </Link>
 
       <header className="mt-6 max-w-2xl">
-        <p className="text-eyebrow font-semibold uppercase text-muted">
+        <p className="font-mono text-eyebrow font-semibold uppercase text-muted">
           {project.year} · {project.role}
         </p>
         <h1 className="mt-3 text-title">{project.title}</h1>
@@ -72,7 +72,7 @@ export default function ProjectDetail() {
       {demo ? (
         <section className="mt-12" aria-label={demo.label}>
           <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-            <h2 className="text-eyebrow font-semibold uppercase text-muted">{demo.label}</h2>
+            <h2 className="font-mono text-eyebrow font-semibold uppercase text-muted">{demo.label}</h2>
             {demo.note && <p className="text-sm text-muted">{demo.note}</p>}
           </div>
           <DemoFrame>

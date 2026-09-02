@@ -19,7 +19,9 @@ export default function Card({
   ...rest
 }) {
   const classes = [
-    'group relative overflow-hidden rounded-card border border-hairline bg-surface shadow-card',
+    // `ticked` puts registration marks just inside two opposite corners, which
+    // is what makes these read as panels rather than rounded rectangles.
+    'group ticked relative overflow-hidden rounded-card border border-hairline bg-surface shadow-card',
     interactive &&
       'transition-[transform,box-shadow,border-color] duration-200 hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-card-hover',
     className,

@@ -1,7 +1,11 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router'
-import '@fontsource-variable/inter'   // registers "Inter Variable"; before app CSS
+// Fonts register before app CSS so the @theme stacks below resolve to real
+// families rather than falling through to the system stack on first paint.
+import '@fontsource-variable/inter'           // body copy
+import '@fontsource-variable/space-grotesk'   // headings
+import '@fontsource-variable/jetbrains-mono'  // metadata: dates, tags, eyebrows
 import './styles/index.css'
 import App from './App.jsx'
 

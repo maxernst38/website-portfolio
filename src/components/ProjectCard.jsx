@@ -24,15 +24,15 @@ export default function ProjectCard({ project }) {
           imgClassName="transition-transform duration-500 ease-soft group-hover:scale-[1.03]"
         />
         {project.demo && (
-          <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-pill bg-white/90 px-2.5 py-1 text-xs font-medium text-ink shadow-card backdrop-blur-sm">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" aria-hidden="true" />
+          <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-input bg-chrome/90 px-2 py-1 font-mono text-xs text-chrome-ink shadow-card backdrop-blur-sm">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
             Live demo
           </span>
         )}
       </div>
 
       <div className="flex flex-1 flex-col p-5">
-        <p className="text-eyebrow font-semibold uppercase text-muted">
+        <p className="font-mono text-eyebrow font-semibold uppercase text-muted">
           {project.year} · {project.role}
         </p>
 
@@ -59,7 +59,7 @@ export default function ProjectCard({ project }) {
 
         <Link
           to={`/projects/${project.slug}`}
-          className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-brand-600"
+          className="mt-4 inline-flex items-center gap-1.5 font-mono text-sm font-medium text-brand-600"
         >
           {project.demo ? 'Try it live' : 'Read more'}
           <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />

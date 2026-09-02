@@ -9,7 +9,7 @@ import { profile, resume } from '../content/site.js'
 function Timeline({ heading, items }) {
   return (
     <section className="mt-12 first:mt-0">
-      <h2 className="text-eyebrow font-semibold uppercase text-muted">{heading}</h2>
+      <h2 className="font-mono text-eyebrow font-semibold uppercase text-muted">{heading}</h2>
       {/* The rail is a left border on the list; dots sit on top of it. */}
       <ol className="mt-5 border-l border-hairline pl-0 [&>li]:ml-[7px]">
         {items.map((item, i) => (
@@ -47,7 +47,7 @@ export default function Resume() {
         */}
         <aside className="mt-12 lg:col-span-4 lg:mt-0 lg:sticky lg:top-24 lg:self-start">
           <div className="rounded-card border border-hairline bg-surface-subtle p-6">
-            <h2 className="text-eyebrow font-semibold uppercase text-muted">Skills</h2>
+            <h2 className="font-mono text-eyebrow font-semibold uppercase text-muted">Skills</h2>
             <div className="mt-4 space-y-4">
               {resume.skills.map((group) => (
                 <div key={group.group}>

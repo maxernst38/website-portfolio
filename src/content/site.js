@@ -16,9 +16,9 @@
 //    no CSS. Keep styling decisions in the components.
 // ─────────────────────────────────────────────────────────────────────────────
 
-// import portrait1     from '../assets/images/portrait-1.jpg'        // 880×1100 (4/5)
-// import portrait2     from '../assets/images/portrait-2.jpg'        // 880×1100 (4/5)
-// import portrait3     from '../assets/images/portrait-3.jpg'        // 880×1100 (4/5)
+import portrait1     from '../assets/images/me_niagara.jpg'        // 880×1100 (4/5)
+import portrait2     from '../assets/images/me_hike_mountain.jpg'        // 880×1100 (4/5)
+import portrait3     from '../assets/images/me_in_woods.jpg'        // 880×1100 (4/5)
 // import shotExplorer  from '../assets/images/project-explorer.png'  // 1120×630 (16/9)
 // import shotKasparo   from '../assets/images/project-kasparobot.png'// 1120×630 (16/9)
 // import shotSlam      from '../assets/images/project-slam.png'      // 1120×630 (16/9)
@@ -35,7 +35,7 @@
    Note: if you move repos with GitHub's "Transfer ownership" rather than
    deleting and re-pushing, GitHub keeps redirects from the old URLs, so links
    out in the world (and this site) keep working through the switch. */
-const GITHUB_USER = 'Max-Ernst'
+const GITHUB_USER = 'maxernst38'
 
 const repo = (name, owner = GITHUB_USER) => `https://github.com/${owner}/${name}`
 
@@ -45,7 +45,7 @@ export const profile = {
   // tags. Change it once here and it updates everywhere.
   name: 'Max Ernst',
   shortName: 'Max',                    // navbar wordmark + footer mark
-  role: 'Robotics Engineer',
+  role: 'Robotics and Software Engineer',
   location: 'Seattle, WA',
   availability: 'Open to new roles',   // hero status pill; set null to hide
   tagline: 'Robotics engineer building perception and control systems that hold up outside the lab.',
@@ -59,11 +59,11 @@ export const profile = {
   // With one photo (or none yet) it renders as a plain image with no controls,
   // so this works at any count. Same 4/5 crop for all of them.
   photos: [
-    { src: null, alt: 'TODO: describe photo 1, e.g. "Max beside a robotic arm"' },
-    { src: null, alt: 'TODO: describe photo 2, e.g. "Max at the fabrication lab"' },
-    { src: null, alt: 'TODO: describe photo 3, e.g. "Max with a competition team"' },
+    { src: portrait1, alt: 'TODO: describe photo 1, e.g. "Max beside a robotic arm"' },
+    { src: portrait2, alt: 'TODO: describe photo 2, e.g. "Max at the fabrication lab"' },
+    { src: portrait3, alt: 'TODO: describe photo 3, e.g. "Max with a competition team"' },
   ],
-  resumePdf: null,   // set to '/resume.pdf' after dropping the file into public/
+  resumePdf: '/resume.pdf',   // set to '/resume.pdf' after dropping the file into public/
 }
 
 /* ── Navigation (drives navbar, mobile menu, footer) ───────────────────── */
@@ -136,7 +136,7 @@ export const projects = [
       // Already on maxernst38; drop the override once everything else moves there.
       { label: 'Source', href: repo('Kasparobot', 'maxernst38'), icon: 'github' },
     ],
-    demo: null,
+    demo: 'kasparobot',
   },
   {
     slug: 'slam-navigation-robot',

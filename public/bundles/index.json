@@ -1,8 +1,8 @@
 [
   {
-    "id": "oxford-pets",
-    "name": "Oxford-IIIT Pets · 37 breeds",
-    "count": 1480
+    "id": "cifar10",
+    "name": "CIFAR-10 · 10 classes",
+    "count": 1500
   },
   {
     "id": "oxford-pets-species",

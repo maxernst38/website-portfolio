@@ -8,54 +8,83 @@ import SocialLinks from '../components/SocialLinks.jsx'
 import { ChevronDown } from '../components/icons.jsx'
 import { heroCtas, homeCards, profile } from '../content/site.js'
 
+/**
+ * The hero is the third dark band, continuous with the navbar above it.
+ *
+ * The blueprint grid runs behind everything and is masked off at the bottom, so
+ * the texture fades out rather than stopping on a hard line where the light
+ * content begins.
+ */
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-brand-50/70 via-white to-white pb-20 pt-16 lg:pb-28 lg:pt-24">
-      <div className="container-page">
+    <section data-chrome className="relative overflow-hidden bg-chrome pb-20 pt-16 lg:pb-28 lg:pt-24">
+      <div
+        className="blueprint pointer-events-none absolute inset-0"
+        style={{ maskImage: 'linear-gradient(to bottom, #000 55%, transparent)' }}
+        aria-hidden="true"
+      />
+
+      <div className="container-page relative">
         <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7">
             {profile.availability && (
-              <p className="inline-flex animate-fade-up items-center gap-2 rounded-pill border border-hairline bg-white px-3 py-1 text-xs font-medium text-body">
+              <p className="inline-flex animate-fade-up items-center gap-2 rounded-pill border border-chrome-line bg-chrome-raised px-3 py-1 font-mono text-xs text-chrome-body">
                 <span className="relative flex h-2 w-2" aria-hidden="true">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
                 </span>
                 {profile.availability}
               </p>
             )}
 
-            <h1 className="mt-6 animate-fade-up text-display [animation-delay:80ms]">
+            <h1 className="mt-6 animate-fade-up text-display text-chrome-ink [animation-delay:80ms]">
               Hi, I’m {profile.name}.
             </h1>
 
-            <p className="mt-4 animate-fade-up text-lg font-medium text-brand-600 [animation-delay:160ms]">
-              {profile.role} · {profile.location}
+            {/* Monospaced and rule-marked, so the role line reads as a readout
+                rather than a subtitle. */}
+            <p className="mt-4 flex animate-fade-up items-start gap-3 font-mono text-sm uppercase tracking-widest text-accent [animation-delay:160ms]">
+              {/* items-start, not items-center: on narrow screens this line
+                  wraps to two, and centring floats the rule between them. */}
+              <span className="mt-[0.6em] h-px w-8 shrink-0 bg-accent/60" aria-hidden="true" />
+              <span>{profile.role} · {profile.location}</span>
             </p>
 
-            <p className="mt-5 max-w-xl animate-fade-up text-lg text-body [animation-delay:240ms]">
+            <p className="mt-5 max-w-xl animate-fade-up text-lg text-chrome-body [animation-delay:240ms]">
               {profile.bio}
             </p>
 
             <div className="mt-8 flex animate-fade-up flex-wrap items-center gap-3 [animation-delay:320ms]">
               {heroCtas.map((cta) => (
-                <Button key={cta.label} to={cta.to} href={cta.href} variant={cta.variant} size="lg">
+                <Button
+                  key={cta.label}
+                  to={cta.to}
+                  href={cta.href}
+                  /* site.js says what a button *is*; the hero decides how that
+                     reads on a dark band. */
+                  variant={cta.variant === 'secondary' ? 'outline' : cta.variant}
+                  size="lg"
+                >
                   {cta.label}
                 </Button>
               ))}
             </div>
 
-            <SocialLinks className="mt-6 -ml-3 animate-fade-up [animation-delay:400ms]" />
+            <SocialLinks
+              tone="chrome"
+              className="mt-6 -ml-3 animate-fade-up [animation-delay:400ms]"
+            />
           </div>
 
           <div className="relative lg:col-span-5">
             <div
-              className="absolute -inset-6 rounded-full bg-brand-200/35 blur-3xl"
+              className="absolute -inset-6 rounded-full bg-brand-500/20 blur-3xl"
               aria-hidden="true"
             />
             <Slideshow
               items={profile.photos}
               ratio="4/5"
-              className="relative border border-hairline shadow-card"
+              className="ticked relative border border-chrome-line shadow-card-hover"
             />
           </div>
         </div>
@@ -63,7 +92,7 @@ function Hero() {
         <div className="mt-16 flex justify-center">
           <a
             href="#explore"
-            className="inline-flex flex-col items-center gap-1 text-sm text-muted transition-colors duration-200 hover:text-brand-600"
+            className="inline-flex flex-col items-center gap-1 font-mono text-xs uppercase tracking-widest text-chrome-muted transition-colors duration-200 hover:text-accent"
           >
             Explore
             <ChevronDown className="h-4 w-4 animate-bounce" />

@@ -32,6 +32,11 @@ export const demos = {
     note: 'Runs entirely in your browser — nothing is uploaded.',
     load: lazy(() => import('./encoding-explorer/index.jsx')),
   },
+  kasparobot: {
+    label: 'Read a board and play it',
+    note: 'Upload a photo of your own — it is read in your browser and never uploaded.',
+    load: lazy(() => import('./kasparobot/index.jsx')),
+  },
 }
 
 export function getDemo(key) {

@@ -5,10 +5,20 @@ import { iconMap, ExternalLink } from './icons.jsx'
  * Renders contact.socials in one of two shapes:
  *   variant="icon" — a compact row of icon buttons (hero, footer)
  *   variant="tile" — labelled cards with handles (contact page)
+ *
+ * `tone="chrome"` is for the icon row when it sits on the dark navbar/footer
+ * band. Written out as whole class strings rather than assembled from a
+ * variable: Tailwind v4 never sees a class built at runtime.
  */
+const ICON_TONES = {
+  default: 'text-muted hover:bg-brand-50 hover:text-brand-600',
+  chrome: 'text-chrome-muted hover:bg-chrome-raised hover:text-accent',
+}
+
 export default function SocialLinks({
   items = contact.socials,
   variant = 'icon',
+  tone = 'default',
   className = '',
 }) {
   if (variant === 'tile') {
@@ -50,7 +60,9 @@ export default function SocialLinks({
               href={item.href}
               aria-label={item.label}
               {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-input text-muted transition-colors duration-200 hover:bg-brand-50 hover:text-brand-600"
+              className={`inline-flex h-11 w-11 items-center justify-center rounded-input transition-colors duration-200 ${
+                ICON_TONES[tone] ?? ICON_TONES.default
+              }`}
             >
               <Glyph className="h-5 w-5" />
             </a>

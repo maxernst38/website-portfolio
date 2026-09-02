@@ -31,17 +31,21 @@ export default function Navbar() {
   return (
     <header
       ref={headerRef}
-      className={`sticky top-0 z-50 bg-white/80 backdrop-blur-md transition-[border-color] duration-300 supports-[backdrop-filter]:bg-white/70 ${
-        scrolled || open ? 'border-b border-hairline' : 'border-b border-transparent'
+      data-chrome
+      /* Opaque, not translucent. The page behind the header is white, so any
+         transparency mixed the bar toward grey and left a visible seam against
+         the hero directly below it. */
+      className={`sticky top-0 z-50 bg-chrome transition-[border-color] duration-300 ${
+        scrolled || open ? 'border-b border-chrome-line' : 'border-b border-transparent'
       }`}
     >
       <div className="container-page flex h-16 items-center justify-between">
         <Link
           to="/"
-          className="inline-flex items-center gap-2 text-base font-semibold text-ink"
+          className="inline-flex items-center gap-2 font-mono text-base font-semibold tracking-tight text-chrome-ink"
         >
           {profile.shortName}
-          <span className="h-[5px] w-[5px] rounded-full bg-brand-600" aria-hidden="true" />
+          <span className="h-[5px] w-[5px] rounded-full bg-accent" aria-hidden="true" />
         </Link>
 
         {/* Desktop navigation */}
@@ -53,10 +57,10 @@ export default function Navbar() {
                   to={item.to}
                   end={item.to === '/'}
                   className={({ isActive }) =>
-                    `relative inline-flex h-16 items-center px-3 text-sm font-medium transition-colors duration-200 ${
+                    `relative inline-flex h-16 items-center px-3 font-mono text-sm transition-colors duration-200 ${
                       isActive
-                        ? 'text-brand-600 after:absolute after:inset-x-3 after:bottom-0 after:h-0.5 after:bg-brand-600'
-                        : 'text-body hover:text-ink'
+                        ? 'text-accent after:absolute after:inset-x-3 after:bottom-0 after:h-0.5 after:bg-accent'
+                        : 'text-chrome-body hover:text-chrome-ink'
                     }`
                   }
                 >
@@ -74,7 +78,7 @@ export default function Navbar() {
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? 'Close menu' : 'Open menu'}
-          className="-mr-2 inline-flex h-11 w-11 items-center justify-center rounded-input text-ink transition-colors duration-200 hover:bg-brand-50 md:hidden"
+          className="-mr-2 inline-flex h-11 w-11 items-center justify-center rounded-input text-chrome-ink transition-colors duration-200 hover:bg-chrome-raised md:hidden"
         >
           {open ? <X /> : <Menu />}
         </button>
@@ -98,7 +102,7 @@ export default function Navbar() {
         }`}
       >
         <div className="min-h-0">
-          <nav aria-label="Mobile" className="container-page border-t border-hairline bg-white pb-3">
+          <nav aria-label="Mobile" className="container-page border-t border-chrome-line bg-chrome pb-3">
             <ul>
               {nav.map((item) => (
                 <li key={item.to}>
@@ -106,8 +110,8 @@ export default function Navbar() {
                     to={item.to}
                     end={item.to === '/'}
                     className={({ isActive }) =>
-                      `block border-b border-hairline py-3.5 text-base font-medium last:border-b-0 ${
-                        isActive ? 'text-brand-600' : 'text-body'
+                      `block border-b border-chrome-line py-3.5 font-mono text-base last:border-b-0 ${
+                        isActive ? 'text-accent' : 'text-chrome-body'
                       }`
                     }
                   >

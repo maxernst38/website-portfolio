@@ -75,12 +75,54 @@ the two bounce the request between them forever.
 
 ---
 
+## The Kasparobot demo
+
+The project page at `/projects/kasparobot` embeds a working tool: it finds a
+chessboard in a photo, lets you set the position, and plays against Stockfish.
+Two things it depends on that are easy to break:
+
+- **`public/stockfish/`** holds the WebAssembly engine (`stockfish.wasm.js`,
+  `stockfish.wasm`) and its `LICENSE.txt`. It is loaded as a Web Worker from
+  `/stockfish/stockfish.wasm.js`, so it must stay in `public/` and keep those
+  filenames — the loader fetches the `.wasm` relative to its own URL. Vercel
+  serves real files before applying the catch-all rewrite in `vercel.json`, so
+  the SPA rewrite does not shadow it.
+- **Stockfish is GPL-3.0.** It stays a separate binary spoken to over UCI rather
+  than being linked into the app, and its licence ships next to it. Keep it that
+  way. `chess.js` (move legality) is BSD-2-Clause.
+
+The single-threaded build is deliberate: the faster threaded one needs
+`Cross-Origin-Embedder-Policy` and `Cross-Origin-Opener-Policy` headers on every
+response from the whole site, and still does not run on mobile browsers.
+
+The piece *detector* is not in the browser — that is a YOLO model in PyTorch.
+Built-in photos carry their known positions; uploads are set up by hand, with an
+optional classical guess. See the comments in `src/demos/kasparobot/detect.js`
+for what that guess can and cannot do.
+
+---
+
 ## Notes for future edits
 
 - **Colours** all come from the `@theme` block in
   [`src/styles/index.css`](src/styles/index.css). Editing the ten
-  `--color-brand-*` lines re-themes the whole site; nothing references
-  Tailwind's `indigo-*` directly.
+  `--color-brand-*` lines re-themes the light half of the site; nothing
+  references a Tailwind palette name directly.
+- **The site has dark chrome.** The navbar, home hero and footer run on the
+  `--color-chrome-*` tokens while the content between them stays light. Those
+  three regions carry `data-chrome`, which swaps the focus ring to the brighter
+  `--color-accent` — the deep teal only just clears 3:1 on that background.
+- **`--color-accent` is not a text colour.** It is 2.2:1 on white. Use it for
+  rules, ticks and indicators; use `--color-brand-600` (5.4:1) for anything
+  anyone has to read.
+- **Three typefaces, by role**: `--font-sans` (Inter) for body, `--font-display`
+  (Space Grotesk) applied to every `h1`–`h4` in the base layer, and
+  `--font-mono` (JetBrains Mono) for *all* metadata — eyebrows, dates, tags,
+  counts. Adding a new eyebrow or date? It gets `font-mono`.
+- **Canvas colours can't read tokens.** The overlay palette in
+  [`src/demos/kasparobot/index.jsx`](src/demos/kasparobot/index.jsx) is the
+  theme written out as hex values. Re-theme the site and that needs a matching
+  edit.
 - **Tailwind v4 only sees class names written out in full.** A class assembled
   at runtime (`` `text-${tone}-600` ``) silently produces no CSS. Variant maps
   in the components are objects of complete literal strings for this reason.

@@ -24,6 +24,18 @@ Export at 2× the display size so they stay sharp on retina screens.
 | Nav card | `card-projects.jpg` | 4 / 3 | 736 × 552 | Home grid |
 | Nav card | `card-contact.jpg` | 4 / 3 | 736 × 552 | Home grid |
 | Project shot | `project-*.png` | 16 / 9 | 1120 × 630 | Projects page |
+| Demo frame | `kasparobot-oblique.jpg` | — | 1000 × 687 | Kasparobot demo |
+| Demo frame | `kasparobot-overhead.jpg` | — | 1000 × 1000 | Kasparobot demo |
+| Demo frame | `kasparobot-wide.jpg` | — | 1000 × 655 | Kasparobot demo |
+
+The three `kasparobot-*.jpg` frames are the odd ones out: they are not content
+slots, so they are not wired up in `site.js`. The demo imports them directly and
+reads their pixels, and each one carries its own board-corner calibration in
+[`src/demos/kasparobot/frames.js`](../../demos/kasparobot/frames.js), fitted
+against **that exact framing**. Replacing a file with a different photo, or
+adding a fourth, will render fine and put the grid in the wrong place — the
+corners have to be refitted. Only the selected frame is downloaded, so the three
+together do not cost a visitor 500 kB.
 
 The hero is a slideshow, so add as many portraits as you like — crop them all
 to the same 4/5 frame so they crossfade cleanly instead of jumping. Add or

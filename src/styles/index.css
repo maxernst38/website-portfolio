@@ -11,6 +11,17 @@
   --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, -apple-system,
                "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
+  /* Headings. Space Grotesk is tighter and more mechanical than Inter, which is
+     what now separates a heading from body copy — the two were close enough in
+     colour that size alone had been doing all the work. */
+  --font-display: "Space Grotesk Variable", "Space Grotesk", var(--font-sans);
+
+  /* Every piece of metadata on the site: dates, tags, eyebrows, counts, IDs.
+     The loudest single signal in this theme — monospaced meta reads as
+     instrumentation before any colour is noticed. */
+  --font-mono: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace,
+               SFMono-Regular, Menlo, Consolas, monospace;
+
   --text-display: clamp(2.5rem, 6.5vw, 4rem);
   --text-display--line-height: 1.04;
   --text-display--letter-spacing: -0.032em;
@@ -21,39 +32,57 @@
 
   --text-eyebrow: 0.75rem;
   --text-eyebrow--line-height: 1rem;
-  --text-eyebrow--letter-spacing: 0.09em;
+  --text-eyebrow--letter-spacing: 0.12em;   /* wider, now that it is monospaced */
 
   /* ── Brand ───────────────────────────────────────────────────────────────
-     Tailwind's indigo, aliased. Re-theme the entire site by editing these ten
-     lines — nothing in the app references `indigo-*` directly. */
-  --color-brand-50:  #eef2ff;
-  --color-brand-100: #e0e7ff;
-  --color-brand-200: #c7d2fe;
-  --color-brand-300: #a5b4fc;
-  --color-brand-400: #818cf8;
-  --color-brand-500: #6366f1;
-  --color-brand-600: #4f46e5;   /* ← the accent */
-  --color-brand-700: #4338ca;
-  --color-brand-800: #3730a3;
-  --color-brand-900: #312e81;
+     Cool teal. Re-theme the entire site by editing these ten lines — nothing
+     in the app references a Tailwind palette name directly.
+
+     Note the split: brand-600 is the deepest teal that still passes AA as body
+     text (5.4:1 on white); everything lighter is decoration. The bright cyan
+     everyone reaches for is --color-accent below, at 2.2:1 — it would fail as
+     text at any size, so it is confined to rules and indicators. */
+  --color-brand-50:  #ecfdff;
+  --color-brand-100: #d0f6fb;
+  --color-brand-200: #a7ebf5;
+  --color-brand-300: #6ed8e9;
+  --color-brand-400: #2fbcd6;
+  --color-brand-500: #12a0bd;
+  --color-brand-600: #0e7490;   /* ← the accent, 5.4:1 on white */
+  --color-brand-700: #155e75;
+  --color-brand-800: #164e63;
+  --color-brand-900: #083344;
+
+  --color-accent: #22d3ee;      /* indicator cyan — rules and ticks only */
+
+  /* ── Dark chrome ─────────────────────────────────────────────────────────
+     Navbar, hero and footer run dark while the content between them stays
+     light. That inversion is most of what makes the site read as instrument
+     housing, and it costs three components rather than the whole app. */
+  --color-chrome:        #0b1620;
+  --color-chrome-raised: #132435;   /* raised panels on the dark chrome */
+  --color-chrome-line:   #24384a;   /* hairlines on the dark chrome     */
+  --color-chrome-ink:    #f2f7fa;   /* 16.7:1 on chrome */
+  --color-chrome-body:   #b8cad8;   /*  9.4:1 on chrome */
+  --color-chrome-muted:  #8ba3b5;   /*  5.8:1 on chrome */
 
   /* ── Semantic ink + surface ──────────────────────────────────────────── */
-  --color-ink:             #0f172a;  /* headings                19.3:1 on white */
-  --color-body:            #475569;  /* paragraphs               7.5:1 on white */
-  --color-muted:           #64748b;  /* dates, meta, captions    4.8:1 — AA     */
-  --color-hairline:        #e2e8f0;  /* every border on the site                */
-  --color-hairline-strong: #cbd5e1;  /* placeholder box outlines               */
+  --color-ink:             #0b1620;  /* headings                18.3:1 on white */
+  --color-body:            #41525e;  /* paragraphs               8.1:1 on white */
+  --color-muted:           #5e7280;  /* dates, meta, captions    5.0:1 — AA     */
+  --color-hairline:        #dfe7ec;  /* every border on the site                */
+  --color-hairline-strong: #c3d1da;  /* placeholder box outlines               */
   --color-surface:         #ffffff;
-  --color-surface-subtle:  #f8fafc;  /* alternating bands, footer              */
+  --color-surface-subtle:  #f3f7f9;  /* alternating bands                      */
 
-  /* ── Radii — tight and confident ─────────────────────────────────────── */
-  --radius-card:  10px;
-  --radius-input: 8px;
+  /* ── Radii — machined rather than soft ───────────────────────────────── */
+  --radius-card:  5px;
+  --radius-input: 4px;
   --radius-pill:  9999px;
 
-  /* ── Elevation: hairlines at rest, one soft shadow on hover ──────────── */
-  --shadow-card:       0 1px 2px 0 rgb(15 23 42 / 0.04);
-  --shadow-card-hover: 0 10px 30px -14px rgb(15 23 42 / 0.22);
+  /* ── Elevation: hairlines at rest, one crisp shadow on hover ─────────── */
+  --shadow-card:       0 1px 2px 0 rgb(11 22 32 / 0.06);
+  --shadow-card-hover: 0 12px 28px -16px rgb(11 22 32 / 0.30);
 
   /* ── Motion ──────────────────────────────────────────────────────────── */
   --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
@@ -82,6 +111,7 @@
 
   h1, h2, h3, h4 {
     color: var(--color-ink);
+    font-family: var(--font-display);
     font-weight: 600;
     letter-spacing: -0.02em;
     text-wrap: balance;
@@ -94,6 +124,13 @@
     outline: 2px solid var(--color-brand-600);
     outline-offset: 2px;
     border-radius: 4px;
+  }
+
+  /* On the dark bands the deep teal ring still clears the 3:1 an indicator
+     needs (3.4:1), but only just. The indicator cyan is 10.1:1 there — it is
+     unusable as text on white, and ideal for exactly this. */
+  [data-chrome] :focus-visible {
+    outline-color: var(--color-accent);
   }
 
   ::selection {
@@ -115,6 +152,59 @@
 }
 
 /* ── Custom utilities ──────────────────────────────────────────────────── */
+
+/**
+ * Faint blueprint grid, for the dark chrome.
+ *
+ * Two repeating gradients rather than an image: it scales to any size, costs no
+ * request, and the line colour follows the token. Kept very low contrast — it
+ * should register as texture, not as a table.
+ */
+@utility blueprint {
+  background-image:
+    repeating-linear-gradient(to right,  rgb(34 211 238 / 0.07) 0 1px, transparent 1px 64px),
+    repeating-linear-gradient(to bottom, rgb(34 211 238 / 0.07) 0 1px, transparent 1px 64px);
+}
+
+/**
+ * Corner ticks — four short L-marks just inside a panel's corners.
+ *
+ * Drawn with two layered elements' worth of gradients on one box, so no extra
+ * markup is needed. This is the detail that makes a card read as a housing
+ * rather than a rounded rectangle; it is deliberately subtle enough that you
+ * notice it second, not first.
+ */
+@utility ticked {
+  position: relative;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    pointer-events: none;
+    border-color: var(--color-brand-400);
+    opacity: 0.55;
+  }
+
+  /* Top-left and bottom-right; the other two corners stay open on purpose,
+     which reads as a registration mark rather than a full frame. */
+  &::before {
+    top: 5px;
+    left: 5px;
+    border-top: 1px solid;
+    border-left: 1px solid;
+  }
+
+  &::after {
+    right: 5px;
+    bottom: 5px;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+  }
+}
+
 @utility container-page {
   width: 100%;
   max-width: 72rem;          /* 1152px */
