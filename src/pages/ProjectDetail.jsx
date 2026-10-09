@@ -1,18 +1,16 @@
 import { useEffect } from 'react'
 import { Link, useParams } from 'react-router'
-import DemoFrame from '../components/DemoFrame.jsx'
-import Media from '../components/Media.jsx'
+import Button from '../components/Button.jsx'
+import ProjectGallery from '../components/ProjectGallery.jsx'
 import Section from '../components/Section.jsx'
 import Tag from '../components/Tag.jsx'
 import { iconMap, ArrowRight, ExternalLink } from '../components/icons.jsx'
 import { profile, projects } from '../content/site.js'
-import { getDemo } from '../demos/registry.js'
 import NotFound from './NotFound.jsx'
 
 export default function ProjectDetail() {
   const { slug } = useParams()
   const project = projects.find((p) => p.slug === slug)
-  const demo = getDemo(project?.demo)
 
   // seo.pages has no entry for dynamic routes, so usePageMeta leaves the title
   // alone and this sets it. Child effects run before the parent's, so this is
@@ -22,6 +20,13 @@ export default function ProjectDetail() {
   }, [project])
 
   if (!project) return <NotFound />
+
+  // The repo is the call to action on every project page: there is nothing to
+  // interact with here, so the next step for an interested reader is the code.
+  // It gets a real button; anything else stays a plain text link beside it.
+  const links = project.links ?? []
+  const source = links.find((l) => l.icon === 'github')
+  const others = links.filter((l) => l !== source)
 
   return (
     <Section>
@@ -48,9 +53,22 @@ export default function ProjectDetail() {
           </div>
         )}
 
-        {project.links?.length > 0 && (
-          <div className="mt-6 flex flex-wrap gap-4">
-            {project.links.map((link) => {
+        {links.length > 0 && (
+          <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">
+            {source && (
+              <Button
+                href={source.href}
+                variant="primary"
+                icon={iconMap.github}
+                iconPosition="left"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Code and usage on GitHub
+              </Button>
+            )}
+
+            {others.map((link) => {
               const Glyph = iconMap[link.icon] ?? ExternalLink
               return (
                 <a
@@ -69,21 +87,7 @@ export default function ProjectDetail() {
         )}
       </header>
 
-      {demo ? (
-        <section className="mt-12" aria-label={demo.label}>
-          <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-            <h2 className="font-mono text-eyebrow font-semibold uppercase text-muted">{demo.label}</h2>
-            {demo.note && <p className="text-sm text-muted">{demo.note}</p>}
-          </div>
-          <DemoFrame>
-            <demo.load />
-          </DemoFrame>
-        </section>
-      ) : (
-        <div className="mt-12">
-          <Media {...project.image} ratio="16/9" className="border border-hairline" />
-        </div>
-      )}
+      <ProjectGallery media={project.media} className="mt-12" />
     </Section>
   )
 }

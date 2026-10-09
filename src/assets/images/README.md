@@ -23,19 +23,26 @@ Export at 2× the display size so they stay sharp on retina screens.
 | Nav card | `card-resume.jpg` | 4 / 3 | 736 × 552 | Home grid |
 | Nav card | `card-projects.jpg` | 4 / 3 | 736 × 552 | Home grid |
 | Nav card | `card-contact.jpg` | 4 / 3 | 736 × 552 | Home grid |
-| Project shot | `project-*.png` | 16 / 9 | 1120 × 630 | Projects page |
-| Demo frame | `kasparobot-oblique.jpg` | — | 1000 × 687 | Kasparobot demo |
-| Demo frame | `kasparobot-overhead.jpg` | — | 1000 × 1000 | Kasparobot demo |
-| Demo frame | `kasparobot-wide.jpg` | — | 1000 × 655 | Kasparobot demo |
+| Project media | `project-<slug>-1.jpg` | 16 / 9 | 1120 × 630 | Project page gallery |
+| Video poster | `project-<slug>-poster.jpg` | 16 / 9 | 1120 × 630 | Project page gallery |
 
-The three `kasparobot-*.jpg` frames are the odd ones out: they are not content
-slots, so they are not wired up in `site.js`. The demo imports them directly and
-reads their pixels, and each one carries its own board-corner calibration in
-[`src/demos/kasparobot/frames.js`](../../demos/kasparobot/frames.js), fitted
-against **that exact framing**. Replacing a file with a different photo, or
-adding a fourth, will render fine and put the grid in the wrong place — the
-corners have to be refitted. Only the selected frame is downloaded, so the three
-together do not cost a visitor 500 kB.
+## Project galleries
+
+Each project's page is a write-up plus a gallery — there are no live demos, so
+the stills and clips are what show the thing working. Add as many entries as a
+project deserves to its `media` array in `site.js`; the **first** one is also
+the thumbnail on the /projects grid, so lead with the strongest shot.
+
+Crop them all to 16/9. The first runs full width and the rest sit two-up, and a
+mixed set of aspect ratios makes that grid look broken.
+
+Videos go on YouTube rather than in this folder, but their **poster** frame is
+an image and belongs here — that is what a visitor sees before pressing play,
+and without one they get a plain dark frame.
+
+The three `kasparobot-*.jpg` files are stock studio chessboard photos that the
+old interactive demo used as computer-vision test input. They are not pictures
+of the robot, so they are not gallery material and nothing imports them now.
 
 The hero is a slideshow, so add as many portraits as you like — crop them all
 to the same 4/5 frame so they crossfade cleanly instead of jumping. Add or

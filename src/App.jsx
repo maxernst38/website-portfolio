@@ -4,6 +4,7 @@ import Home from './pages/Home.jsx'
 import Resume from './pages/Resume.jsx'
 import Projects from './pages/Projects.jsx'
 import ProjectDetail from './pages/ProjectDetail.jsx'
+import Tutoring from './pages/Tutoring.jsx'
 import Contact from './pages/Contact.jsx'
 import NotFound from './pages/NotFound.jsx'
 
@@ -15,6 +16,7 @@ export default function App() {
         <Route path="resume" element={<Resume />} />
         <Route path="projects" element={<Projects />} />
         <Route path="projects/:slug" element={<ProjectDetail />} />
+        <Route path="tutoring" element={<Tutoring />} />
         <Route path="contact" element={<Contact />} />
         <Route path="*" element={<NotFound />} />
       </Route>

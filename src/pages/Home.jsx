@@ -14,18 +14,25 @@ import { heroCtas, homeCards, profile } from '../content/site.js'
  * The blueprint grid runs behind everything and is masked off at the bottom, so
  * the texture fades out rather than stopping on a hard line where the light
  * content begins.
+ *
+ * It fills the viewport below the sticky navbar -- hence the 4rem, which is the
+ * navbar's h-16 -- so the Explore cue sits on the fold. min-h, not h, lets the
+ * band grow instead of clipping on short landscape screens.
  */
 function Hero() {
   return (
-    <section data-chrome className="relative overflow-hidden bg-chrome pb-20 pt-16 lg:pb-28 lg:pt-24">
+    <section
+      data-chrome
+      className="relative flex min-h-[calc(100svh-4rem)] flex-col overflow-hidden bg-chrome pb-10 pt-16 lg:pt-24"
+    >
       <div
         className="blueprint pointer-events-none absolute inset-0"
         style={{ maskImage: 'linear-gradient(to bottom, #000 55%, transparent)' }}
         aria-hidden="true"
       />
 
-      <div className="container-page relative">
-        <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
+      <div className="container-page relative flex flex-1 flex-col">
+        <div className="grid flex-1 items-center gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7">
             {profile.availability && (
               <p className="inline-flex animate-fade-up items-center gap-2 rounded-pill border border-chrome-line bg-chrome-raised px-3 py-1 font-mono text-xs text-chrome-body">
@@ -38,16 +45,13 @@ function Hero() {
             )}
 
             <h1 className="mt-6 animate-fade-up text-display text-chrome-ink [animation-delay:80ms]">
-              Hi, I’m {profile.name}.
+              {profile.name}
             </h1>
 
-            {/* Monospaced and rule-marked, so the role line reads as a readout
-                rather than a subtitle. */}
-            <p className="mt-4 flex animate-fade-up items-start gap-3 font-mono text-sm uppercase tracking-widest text-accent [animation-delay:160ms]">
-              {/* items-start, not items-center: on narrow screens this line
-                  wraps to two, and centring floats the rule between them. */}
-              <span className="mt-[0.6em] h-px w-8 shrink-0 bg-accent/60" aria-hidden="true" />
-              <span>{profile.role} · {profile.location}</span>
+            {/* Monospaced, so the role line reads as a readout rather than a
+                subtitle. */}
+            <p className="mt-4 animate-fade-up font-mono text-sm uppercase tracking-widest text-accent [animation-delay:160ms]">
+              {profile.role} · {profile.location}
             </p>
 
             <p className="mt-5 max-w-xl animate-fade-up text-lg text-chrome-body [animation-delay:240ms]">
@@ -89,7 +93,7 @@ function Hero() {
           </div>
         </div>
 
-        <div className="mt-16 flex justify-center">
+        <div className="mt-auto flex justify-center pt-12">
           <a
             href="#explore"
             className="inline-flex flex-col items-center gap-1 font-mono text-xs uppercase tracking-widest text-chrome-muted transition-colors duration-200 hover:text-accent"
@@ -113,11 +117,11 @@ export default function Home() {
           <SectionHeading
             eyebrow="Explore"
             title="Where to next?"
-            description="Three places to get a sense of what I do and how to reach me."
+            description="A few places to get a sense of what I do and how to reach me."
           />
         </Reveal>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-3 sm:gap-6">
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
           {homeCards.map((card, i) => (
             <Reveal key={card.to} delay={i * 90}>
               <NavCard card={card} className="h-full" />

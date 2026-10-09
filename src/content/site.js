@@ -50,18 +50,18 @@ export const profile = {
   availability: 'Open to new roles',   // hero status pill; set null to hide
   tagline: 'Robotics engineer building perception and control systems that hold up outside the lab.',
   bio:
-    'I build robots that have to work in the real world — telerobotic surgery arms, ' +
-    'autonomous ground vehicles, and the perception pipelines that let them understand ' +
-    'what they are looking at. Dual B.S.E. in Computer Science and Robotics from the ' +
+    'Dual B.S.E. in Computer Science and Robotics from the ' +
     'University of Michigan, with work spanning DARPA-funded research, medical-grade ' +
-    'robotic control, and computer vision at dataset scale.',
+    'robotic control, and computer vision datasets.' +
+    'I split my time outside of work between hiking, camping, skiing, playing volleyball, and' +
+    ' playing bass and drums.',
   // Hero slideshow. Add as many as you like — they crossfade automatically.
   // With one photo (or none yet) it renders as a plain image with no controls,
   // so this works at any count. Same 4/5 crop for all of them.
   photos: [
-    { src: portrait1, alt: 'TODO: describe photo 1, e.g. "Max beside a robotic arm"' },
-    { src: portrait2, alt: 'TODO: describe photo 2, e.g. "Max at the fabrication lab"' },
-    { src: portrait3, alt: 'TODO: describe photo 3, e.g. "Max with a competition team"' },
+    { src: portrait1, alt: '' },
+    { src: portrait2, alt: '' },
+    { src: portrait3, alt: '' },
   ],
   resumePdf: '/resume.pdf',   // set to '/resume.pdf' after dropping the file into public/
 }
@@ -71,6 +71,7 @@ export const nav = [
   { label: 'Home', to: '/' },
   { label: 'Resume', to: '/resume' },
   { label: 'Projects', to: '/projects' },
+  { label: 'Tutoring', to: '/tutoring' },
   { label: 'Contact', to: '/contact' },
 ]
 
@@ -84,6 +85,7 @@ export const heroCtas = [
 export const homeCards = [
   { to: '/resume', label: 'Resume' },
   { to: '/projects', label: 'Projects' },
+  { to: '/tutoring', label: 'Tutoring' },
   { to: '/contact', label: 'Contact' },
 ]
 
@@ -91,9 +93,26 @@ export const homeCards = [
    Each project gets its own page at /projects/<slug>, where `description`
    is shown in full. Order here is the order they appear on the page.
 
-   `demo` attaches a live, interactive app to that page. Set it to a key from
-   src/demos/registry.js, or null for a write-up only. Demos are lazy-loaded,
-   so a heavy one costs the rest of the site nothing until someone opens it. */
+   `media` is the gallery on that page, in display order. Its first entry is
+   also the thumbnail on the /projects grid, so lead with the best shot.
+
+   Two kinds of entry:
+
+     { kind: 'image', src: shotKasparo, alt: 'Arm lifting a piece' }
+     { kind: 'video', provider: 'youtube', id: 'dQw4w9WgXcQ',
+       poster: shotKasparo, alt: 'One full move, start to finish' }
+
+   `kind` defaults to 'image', so a bare { src, alt } is a photo. A video
+   renders as its poster plus a play button and pulls the YouTube iframe in
+   only once clicked — so a project page costs a visitor nothing until they
+   press play, and no third-party frame loads for anyone who never does.
+   `poster` is optional; without one the facade is a plain dark frame.
+
+   Entries with `src: null` render as correctly-sized placeholders, so this
+   list doubles as a shooting list — the alt text says what to capture.
+
+   There are deliberately no live demos on this site. Code and usage belong
+   on GitHub, which is what `links` is for; the gallery shows it working. */
 export const projects = [
   {
     slug: 'encoding-explorer',
@@ -111,11 +130,14 @@ export const projects = [
       'mislabelled samples and blurred class boundaries show up as spatial outliers rather ' +
       'than as a number in an evaluation table.',
     tags: ['Python', 'CLIP', 'PyTorch', 'three.js', 'WebGL'],
-    image: { src: null, alt: 'TODO: screenshot of the 3D embedding view with class centroids' },
+    media: [
+      { src: null, alt: 'The 3D embedding cloud, coloured by class, with centroids marked' },
+      { src: null, alt: 'Eigen-images along a class’s direction of maximum variance' },
+      { src: null, alt: 'A mislabelled sample sitting far from its class centroid' },
+    ],
     links: [
       { label: 'Source', href: repo('Latent-Space-3D-Explorer'), icon: 'github' },
     ],
-    demo: 'encoding-explorer',
   },
   {
     slug: 'kasparobot',
@@ -131,12 +153,15 @@ export const projects = [
       'state. Stockfish selects the move, and a ROS control interface translates that ' +
       'decision into arm trajectories precise enough to actually pick up and place a piece.',
     tags: ['Python', 'YOLO', 'OpenCV', 'ROS', 'Stockfish'],
-    image: { src: null, alt: 'TODO: photo of the arm mid-move over the chessboard' },
+    media: [
+      { src: null, alt: 'The arm mid-move, lifting a piece clear of the board' },
+      { src: null, alt: 'The camera’s oblique view beside the rectified board and its FEN' },
+      { src: null, alt: 'YOLO piece detections overlaid on a live frame' },
+    ],
     links: [
       // Already on maxernst38; drop the override once everything else moves there.
       { label: 'Source', href: repo('Kasparobot', 'maxernst38'), icon: 'github' },
     ],
-    demo: 'kasparobot',
   },
   {
     slug: 'slam-navigation-robot',
@@ -152,9 +177,12 @@ export const projects = [
       'planning runs over the generated occupancy grid to get from start to goal with no ' +
       'human intervention.',
     tags: ['C++', 'ROS', 'SLAM', 'LiDAR', 'Computer Vision'],
-    image: { src: null, alt: 'TODO: the robot in the maze, or the generated occupancy map' },
+    media: [
+      { src: null, alt: 'The robot partway through the maze' },
+      { src: null, alt: 'The generated occupancy grid with the planned path drawn on it' },
+      { src: null, alt: 'A colour-coded goal marker as the camera sees it' },
+    ],
     links: [],   // TODO: add a repo or demo video link if you have one
-    demo: null,
   },
   {
     slug: 'pokemon-gan',
@@ -169,11 +197,13 @@ export const projects = [
       'dataset size — under a thousand designs — so getting a stable generator meant heavy ' +
       'augmentation pipelines to expand diversity and stop training from collapsing.',
     tags: ['Python', 'PyTorch', 'GAN', 'SLURM'],
-    image: { src: null, alt: 'TODO: grid of generated Pokémon designs' },
+    media: [
+      { src: null, alt: 'Grid of generated designs' },
+      { src: null, alt: 'Training progression from noise to recognisable designs' },
+    ],
     links: [
       { label: 'Source', href: repo('Pokemon-Design-Synthesis'), icon: 'github' },
     ],
-    demo: null,
   },
   {
     slug: 'diffusion-image-generator',
@@ -188,9 +218,11 @@ export const projects = [
       'fine-tuning an off-the-shelf checkpoint. Trained on Flickr8k in PyTorch with CUDA ' +
       'acceleration on a local NVIDIA GPU.',
     tags: ['Python', 'PyTorch', 'Diffusion', 'CUDA'],
-    image: { src: null, alt: 'TODO: sample generations with their text prompts' },
+    media: [
+      { src: null, alt: 'Sample generations captioned with the prompts that produced them' },
+      { src: null, alt: 'One prompt denoised across timesteps' },
+    ],
     links: [],   // TODO: add a repo link if this is published
-    demo: null,
   },
 ]
 
@@ -323,6 +355,108 @@ export const resume = {
   ],
 }
 
+/* ── Tutoring ──────────────────────────────────────────────────────────
+   Drives /tutoring. `rate: null` renders as "Rates on request", so the page
+   is publishable before pricing is decided. */
+export const tutoring = {
+  headline: 'One-on-one tutoring in code, math and robotics.',
+  blurb:
+    'I tutor high school and university students in the subjects I use every day as ' +
+    'an engineer. Sessions are built around your coursework, project or competition, ' +
+    'and the goal is always the same: you understand it well enough to do it without me.',
+
+  subjects: [
+    {
+      title: 'Programming',
+      description:
+        'From a first language to confident, readable code. Debugging, project structure, ' +
+        'and the habits that make assignments stop fighting back.',
+      tags: ['Python', 'C++', 'Java', 'JavaScript'],
+    },
+    {
+      title: 'Computer Science',
+      description:
+        'Core university coursework: data structures, algorithms, complexity, and the ' +
+        'problem-solving patterns behind technical interviews.',
+      tags: ['Data structures', 'Algorithms', 'AP CS A'],
+    },
+    {
+      title: 'Math',
+      description:
+        'Algebra through calculus and linear algebra, taught with an eye on where each ' +
+        'idea actually gets used.',
+      tags: ['Algebra', 'Precalculus', 'Calculus', 'Linear algebra'],
+    },
+    {
+      title: 'Robotics',
+      description:
+        'Competition prep and personal builds: robot design, sensors, control, and ' +
+        'programming, from VEX to ROS.',
+      tags: ['VEX V5/IQ', 'ROS', 'Arduino', 'Sensors'],
+    },
+    {
+      title: 'Machine Learning & Vision',
+      description:
+        'The maths and code behind modern ML, for students taking a course or building ' +
+        'their first model.',
+      tags: ['PyTorch', 'OpenCV', 'Neural networks'],
+    },
+    {
+      title: 'Research Mentoring',
+      description:
+        'For students starting an independent project: scoping a question, running ' +
+        'experiments, and writing it up for a science fair or conference.',
+      tags: ['Project design', 'Technical writing'],
+    },
+  ],
+
+  // Shown as offer cards. `rate` is a display string, e.g. '$80 / hour'.
+  formats: [
+    {
+      title: 'Online',
+      description: 'Video call with a shared screen and whiteboard. Available anywhere.',
+      rate: null,   // TODO: e.g. '$70 / hour'
+    },
+    {
+      title: 'In person',
+      description: 'Around Seattle and the Eastside, at a library or your home.',
+      rate: null,   // TODO: e.g. '$85 / hour'
+    },
+  ],
+
+  steps: [
+    {
+      title: 'Get in touch',
+      description: 'Email me with the subject, level, and what you are working towards.',
+    },
+    {
+      title: 'Free intro call',
+      description: 'A short call to see where you are and whether I am the right fit.',
+    },
+    {
+      title: 'Regular sessions',
+      description: 'Weekly or as needed, each one planned around what is coming up next.',
+    },
+  ],
+
+  faqs: [
+    {
+      q: 'Who do you tutor?',
+      a: 'Mostly high school and university students, plus adults learning to code. If you are not sure your subject is covered, ask.',
+    },
+    {
+      q: 'How long is a session?',
+      a: 'Usually an hour. Ninety minutes works well for project help or exam prep.',
+    },
+    {
+      q: 'Do you help with homework?',
+      a: 'Yes, by working through it with you rather than doing it for you. You will leave able to solve the next one yourself.',
+    },
+  ],
+
+  emailSubject: 'Tutoring inquiry',   // prefilled mailto subject
+}
+
 /* ── Contact ───────────────────────────────────────────────────────────── */
 export const contact = {
   headline: 'Let’s build something that works.',
@@ -370,6 +504,11 @@ export const seo = {
       title: `Projects — ${profile.name}`,
       description:
         'Robotics and machine learning projects: a 3D CLIP embedding explorer, an autonomous chess robot, a SLAM navigation robot, and generative image models.',
+    },
+    '/tutoring': {
+      title: `Tutoring — ${profile.name}`,
+      description:
+        'One-on-one tutoring in programming, computer science, math, robotics and machine learning, online or in person around Seattle.',
     },
     '/contact': {
       title: `Contact — ${profile.name}`,

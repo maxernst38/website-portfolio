@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import Media from './Media.jsx'
 import { Pause, Play } from './icons.jsx'
 
@@ -10,11 +10,14 @@ import { Pause, Play } from './icons.jsx'
  * unchanged whether site.js has no photos yet, one, or six.
  *
  * Accessibility notes, because auto-advancing carousels are a classic trap:
- *  - Under prefers-reduced-motion it does not auto-advance at all; the dots
- *    still work, so the content stays reachable.
  *  - WCAG 2.2.2 (Pause, Stop, Hide) requires an explicit control for anything
  *    that moves on its own, so there is a real pause button — hover-to-pause
  *    alone would not satisfy it, and would strand touch users regardless.
+ *  - It does auto-advance under prefers-reduced-motion, which is deliberate.
+ *    index.css flattens transitions to 0.01ms there, so slides hard-cut rather
+ *    than crossfade: reduced-motion users see every photo with no animation,
+ *    and the pause button is the part 2.2.2 actually asks for. Gating autoplay
+ *    on the preference instead left the deck stuck on photo 1.
  *  - Advancing also pauses when the tab is hidden, so a backgrounded page is
  *    not burning through the deck.
  *  - Inactive slides are aria-hidden, so a screen reader reads one image, not
@@ -32,12 +35,6 @@ export default function Slideshow({
 
   const [index, setIndex] = useState(0)
   const [playing, setPlaying] = useState(true)
-  const reducedRef = useRef(false)
-
-  useEffect(() => {
-    reducedRef.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reducedRef.current) setPlaying(false)
-  }, [])
 
   const go = useCallback(
     (next) => setIndex(((next % photos.length) + photos.length) % photos.length),
